@@ -15,4 +15,8 @@ class CFG:
     DATA_PATH: str = DATA_PATH
     RAW_DATA: str = RAW_DATA
     PROCESSED_DATA: str = PROCESSED_DATA
+    SEED: int = 69
+    NFOLDS: int = 3
+    REPEATS: int = 3
+    
     
