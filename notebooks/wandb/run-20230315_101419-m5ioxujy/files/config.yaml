@@ -1,0 +1,66 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.14.0
+    framework: lightgbm
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.10.9
+    session_history: code/_session_history.ipynb
+    start_time: 1678875263.057425
+    t:
+      1:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 35
+      - 53
+      - 55
+      2:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 35
+      - 53
+      - 55
+      3:
+      - 2
+      - 15
+      - 23
+      4: 3.10.9
+      5: 0.14.0
+      8:
+      - 1
+      - 5
+      10:
+      - 5
+    viz:
+      calibration_curve:
+        historyFieldSettings:
+          key: calibration_curve
+          x-axis: _step
+        id: wandb/calibration/v1
+      class_proportions:
+        historyFieldSettings:
+          key: class_proportions
+          x-axis: _step
+        id: wandb/class_proportions/v1
+      confusion_matrix:
+        historyFieldSettings:
+          key: confusion_matrix
+          x-axis: _step
+        id: wandb/confusion_matrix/v1
+      feature_importances:
+        historyFieldSettings:
+          key: feature_importances
+          x-axis: _step
+        id: wandb/feature_importances/v1
+      summary_metrics:
+        historyFieldSettings:
+          key: summary_metrics
+          x-axis: _step
+        id: wandb/metrics/v1

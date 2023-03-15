@@ -1,0 +1,99 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.14.0
+    framework: lightgbm
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.10.9
+    session_history: code/_session_history.ipynb
+    start_time: 1678873485.635967
+    t:
+      1:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 35
+      - 53
+      - 55
+      2:
+      - 5
+      - 6
+      - 7
+      - 8
+      - 35
+      - 53
+      - 55
+      3:
+      - 2
+      - 15
+      - 16
+      - 23
+      4: 3.10.9
+      5: 0.14.0
+      8:
+      - 1
+      - 5
+bayesian_matrix_reg:
+  desc: null
+  value: 0.10000000149011612
+bootstrap_type:
+  desc: null
+  value: MVS
+border_count:
+  desc: null
+  value: 254
+depth:
+  desc: null
+  value: 6
+grow_policy:
+  desc: null
+  value: SymmetricTree
+iterations:
+  desc: null
+  value: 9999
+l2_leaf_reg:
+  desc: null
+  value: 3
+leaf_estimation_iterations:
+  desc: null
+  value: 10
+leaf_estimation_method:
+  desc: null
+  value: Newton
+learning_rate:
+  desc: null
+  value: 0.15000000596046448
+max_leaves:
+  desc: null
+  value: 64
+min_data_in_leaf:
+  desc: null
+  value: 1
+model_size_reg:
+  desc: null
+  value: 0.5
+od_wait:
+  desc: null
+  value: 100
+posterior_sampling:
+  desc: null
+  value: false
+random_seed:
+  desc: null
+  value: 69
+random_state:
+  desc: null
+  value: 69
+random_strength:
+  desc: null
+  value: 1
+sampling_frequency:
+  desc: null
+  value: PerTree
+subsample:
+  desc: null
+  value: 0.800000011920929
