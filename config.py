@@ -18,5 +18,6 @@ class CFG:
     SEED: int = 69
     NFOLDS: int = 3
     REPEATS: int = 3
-    
+    XG_PATIENCE: int = 50
+    CB_PATIENCE: int = 100
     
