@@ -1,0 +1,76 @@
+{
+    "os": "Linux-5.15.0-1030-gcp-x86_64-with-glibc2.35",
+    "python": "3.10.9",
+    "heartbeatAt": "2023-03-18T22:30:22.697431",
+    "startedAt": "2023-03-18T22:30:22.356362",
+    "docker": null,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "<python with no main file>",
+    "git": {
+        "remote": "https://github.com/Graham-Broughton/S3E10.git",
+        "commit": "f82e341c3ecb53eeb495fdadc6f9983e7231d14b"
+    },
+    "email": null,
+    "root": "/home/broug/Desktop/S3E10",
+    "host": "instance-6",
+    "username": "broug",
+    "executable": "/home/broug/mambaforge/envs/kaggle/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2249.998,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2249.998,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "total": 48.27519989013672,
+        "used": 11.671852111816406
+    },
+    "memory": {
+        "total": 31.34891128540039
+    }
+}

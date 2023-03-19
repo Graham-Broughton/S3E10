@@ -1,0 +1,78 @@
+wandb_version: 1
+
+C:
+  desc: null
+  value: 0.1
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.14.0
+    framework: lightgbm
+    is_jupyter_run: true
+    is_kaggle_kernel: false
+    python_version: 3.10.9
+    session_history: code/_session_history.ipynb
+    start_time: 1679184906.263498
+    t:
+      1:
+      - 5
+      - 6
+      - 8
+      - 35
+      - 53
+      - 55
+      2:
+      - 5
+      - 6
+      - 8
+      - 35
+      - 53
+      - 55
+      3:
+      - 2
+      - 13
+      - 16
+      - 23
+      4: 3.10.9
+      5: 0.14.0
+      8:
+      - 1
+      - 5
+      10:
+      - 5
+    viz:
+      class_proportions:
+        historyFieldSettings:
+          key: class_proportions
+          x-axis: _step
+        id: wandb/class_proportions/v1
+      confusion_matrix:
+        historyFieldSettings:
+          key: confusion_matrix
+          x-axis: _step
+        id: wandb/confusion_matrix/v1
+      precision_recall:
+        historyFieldSettings:
+          key: precision_recall
+          x-axis: _step
+        id: wandb/pr_curve/v1
+      roc:
+        historyFieldSettings:
+          key: roc
+          x-axis: _step
+        id: wandb/roc/v1
+max_iter:
+  desc: null
+  value: 10000
+n_jobs:
+  desc: null
+  value: -1
+random_state:
+  desc: null
+  value: 69
+solver:
+  desc: null
+  value: lbfgs
+tol:
+  desc: null
+  value: 0.001

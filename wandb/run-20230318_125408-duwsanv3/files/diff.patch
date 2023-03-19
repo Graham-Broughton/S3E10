@@ -1,0 +1,302 @@
+diff --git a/notebooks/9.PCA.ipynb b/notebooks/9.PCA.ipynb
+index c7741da..fb77210 100644
+--- a/notebooks/9.PCA.ipynb
++++ b/notebooks/9.PCA.ipynb
+@@ -12,28 +12,9 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 14,
++   "execution_count": 2,
+    "metadata": {},
+-   "outputs": [
+-    {
+-     "name": "stderr",
+-     "output_type": "stream",
+-     "text": [
+-      "Failed to detect the name of this notebook, you can set it manually with the WANDB_NOTEBOOK_NAME environment variable to enable code saving.\n",
+-      "\u001b[34m\u001b[1mwandb\u001b[0m: Currently logged in as: \u001b[33mg-broughton\u001b[0m. Use \u001b[1m`wandb login --relogin`\u001b[0m to force relogin\n"
+-     ]
+-    },
+-    {
+-     "data": {
+-      "text/plain": [
+-       "True"
+-      ]
+-     },
+-     "execution_count": 14,
+-     "metadata": {},
+-     "output_type": "execute_result"
+-    }
+-   ],
++   "outputs": [],
+    "source": [
+     "import pandas as pd\n",
+     "from pandas.io.formats.style import Styler\n",
+@@ -73,9 +54,7 @@
+     "CFG = CFG()\n",
+     "pd.options.display.float_format = '{:,.2f}'.format\n",
+     "pd.set_option('display.max_columns', CFG.NCOLS)\n",
+-    "pd.set_option('display.max_rows', CFG.NROWS)\n",
+-    "\n",
+-    "wandb.init(project='S3E10', )"
++    "pd.set_option('display.max_rows', CFG.NROWS)"
+    ]
+   },
+   {
+@@ -110,35 +89,32 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 15,
++   "execution_count": 4,
+    "metadata": {},
+-   "outputs": [],
++   "outputs": [
++    {
++     "name": "stderr",
++     "output_type": "stream",
++     "text": [
++      "Failed to detect the name of this notebook, you can set it manually with the WANDB_NOTEBOOK_NAME environment variable to enable code saving.\n",
++      "\u001b[34m\u001b[1mwandb\u001b[0m: Currently logged in as: \u001b[33mg-broughton\u001b[0m. Use \u001b[1m`wandb login --relogin`\u001b[0m to force relogin\n"
++     ]
++    }
++   ],
+    "source": [
+     "orig = pd.read_csv(os.path.join(CFG.RAW_DATA, 'Pulsar.csv'))\n",
+     "train = pd.read_csv(os.path.join(CFG.RAW_DATA, 'train.csv')).drop(columns='id')\n",
+     "test = pd.read_csv(os.path.join(CFG.RAW_DATA, 'test.csv')).drop(columns='id')\n",
+     "\n",
++    "wandb.init(project='S3E10', name='XGBoost', group='XGBoost')\n",
+     "config = wandb.config"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 16,
++   "execution_count": null,
+    "metadata": {},
+-   "outputs": [
+-    {
+-     "ename": "Error",
+-     "evalue": "You must call wandb.init() before wandb.config['scaler']",
+-     "output_type": "error",
+-     "traceback": [
+-      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+-      "\u001b[0;31mError\u001b[0m                                     Traceback (most recent call last)",
+-      "Cell \u001b[0;32mIn[16], line 2\u001b[0m\n\u001b[1;32m      1\u001b[0m scaler \u001b[39m=\u001b[39m StandardScaler()\n\u001b[0;32m----> 2\u001b[0m config[\u001b[39m'\u001b[39;49m\u001b[39mscaler\u001b[39;49m\u001b[39m'\u001b[39;49m] \u001b[39m=\u001b[39m \u001b[39m\"\u001b[39m\u001b[39mstandard\u001b[39m\u001b[39m\"\u001b[39m\n\u001b[1;32m      4\u001b[0m scaled_tr \u001b[39m=\u001b[39m pd\u001b[39m.\u001b[39mDataFrame(scaler\u001b[39m.\u001b[39mfit_transform(train\u001b[39m.\u001b[39mdrop(\u001b[39m\"\u001b[39m\u001b[39mClass\u001b[39m\u001b[39m\"\u001b[39m, axis\u001b[39m=\u001b[39m\u001b[39m1\u001b[39m)), columns\u001b[39m=\u001b[39mtrain\u001b[39m.\u001b[39mdrop(\u001b[39m\"\u001b[39m\u001b[39mClass\u001b[39m\u001b[39m\"\u001b[39m, axis\u001b[39m=\u001b[39m\u001b[39m1\u001b[39m)\u001b[39m.\u001b[39mcolumns)\n\u001b[1;32m      5\u001b[0m scaled_tr[\u001b[39m\"\u001b[39m\u001b[39mClass\u001b[39m\u001b[39m\"\u001b[39m] \u001b[39m=\u001b[39m train[\u001b[39m\"\u001b[39m\u001b[39mClass\u001b[39m\u001b[39m\"\u001b[39m]\n",
+-      "File \u001b[0;32m~/mambaforge/envs/kaggle/lib/python3.10/site-packages/wandb/sdk/lib/preinit.py:17\u001b[0m, in \u001b[0;36mPreInitObject.__setitem__\u001b[0;34m(self, key, value)\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[39mdef\u001b[39;00m \u001b[39m__setitem__\u001b[39m(\u001b[39mself\u001b[39m, key: \u001b[39mstr\u001b[39m, value: Any) \u001b[39m-\u001b[39m\u001b[39m>\u001b[39m Any:\n\u001b[0;32m---> 17\u001b[0m     \u001b[39mraise\u001b[39;00m wandb\u001b[39m.\u001b[39mError(\u001b[39mf\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mYou must call wandb.init() before \u001b[39m\u001b[39m{\u001b[39;00m\u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_name\u001b[39m}\u001b[39;00m\u001b[39m[\u001b[39m\u001b[39m{\u001b[39;00mkey\u001b[39m!r}\u001b[39;00m\u001b[39m]\u001b[39m\u001b[39m\"\u001b[39m)\n",
+-      "\u001b[0;31mError\u001b[0m: You must call wandb.init() before wandb.config['scaler']"
+-     ]
+-    }
+-   ],
++   "outputs": [],
+    "source": [
+     "scaler = StandardScaler()\n",
+     "config['scaler'] = \"standard\"\n",
+@@ -154,7 +130,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 6,
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+@@ -172,7 +148,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 39,
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -201,7 +177,7 @@
+           8
+          ],
+          "y": [
+-          0.5834717140043428,
++          0.5834717140043426,
+           0.8240452707069856,
+           0.9083329095141839,
+           0.958652896928117,
+@@ -231,15 +207,15 @@
+           8
+          ],
+          "y": [
+-          0.5834717140043428,
+-          0.2405735567026428,
+-          0.08428763880719821,
+-          0.05031998741393307,
+-          0.02235616169300326,
+-          0.01316782157984296,
+-          0.0031529629659316403,
+-          0.0015367075104978627,
+-          0.0011334493226072893
++          0.5834717140043426,
++          0.24057355670264302,
++          0.0842876388071983,
++          0.050319987413933044,
++          0.022356161693003297,
++          0.01316782157984294,
++          0.0031529629659316416,
++          0.0015367075104978586,
++          0.0011334493226072898
+          ]
+         }
+        ],
+@@ -1125,69 +1101,63 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 7,
++   "execution_count": null,
++   "metadata": {},
++   "outputs": [],
++   "source": [
++    "def pca_transform(train, test, N):\n",
++    "    pca = PCA(n_components=N, random_state=CFG.SEED)\n",
++    "    X = pca.fit_transform(train.drop(\"Class\", axis=1))\n",
++    "    X = pd.DataFrame(X, columns=[f'PC{i}' for i in range(N)])\n",
++    "    y = train['Class']\n",
++    "    return pca.transform(test), X, y"
++   ]
++  },
++  {
++   "cell_type": "code",
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [],
+    "source": [
+     "N = 3\n",
+-    "pca = PCA(n_components=N, random_state=CFG.SEED)\n",
+-    "X = pca.fit_transform(scaled_tr.drop(\"Class\", axis=1))\n",
+-    "X = pd.DataFrame(X, columns=[f'PC{i}' for i in range(N)])\n",
+-    "y = scaled_tr['Class']\n",
++    "config['n_components'] = N\n",
+     "\n",
+-    "test = pca.transform(scaled_tst)"
++    "X_test, X, y = pca_transform(scaled_tr, scaled_tst, N)"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 8,
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [
+     {
+      "name": "stdout",
+      "output_type": "stream",
+      "text": [
+-      "[0]\tvalidation_0-logloss:0.65621\n",
+-      "[100]\tvalidation_0-logloss:0.24852\n",
+-      "[200]\tvalidation_0-logloss:0.24745\n",
+-      "[281]\tvalidation_0-logloss:0.24747\n",
+-      "[0]\tvalidation_0-logloss:0.65623\n",
+-      "[100]\tvalidation_0-logloss:0.24717\n",
+-      "[200]\tvalidation_0-logloss:0.24599\n",
+-      "[300]\tvalidation_0-logloss:0.24596\n",
+-      "[321]\tvalidation_0-logloss:0.24600\n",
+-      "[0]\tvalidation_0-logloss:0.65617\n",
+-      "[100]\tvalidation_0-logloss:0.24754\n",
+-      "[200]\tvalidation_0-logloss:0.24642\n",
+-      "[300]\tvalidation_0-logloss:0.24630\n",
+-      "[333]\tvalidation_0-logloss:0.24633\n",
+-      "[0]\tvalidation_0-logloss:0.65624\n",
+-      "[100]\tvalidation_0-logloss:0.24674\n",
+-      "[200]\tvalidation_0-logloss:0.24606\n",
+-      "[225]\tvalidation_0-logloss:0.24604\n",
+-      "[0]\tvalidation_0-logloss:0.65613\n",
+-      "[100]\tvalidation_0-logloss:0.24965\n",
+-      "[200]\tvalidation_0-logloss:0.24884\n",
+-      "[294]\tvalidation_0-logloss:0.24881\n",
+-      "[0]\tvalidation_0-logloss:0.65614\n",
+-      "[100]\tvalidation_0-logloss:0.24731\n",
+-      "[200]\tvalidation_0-logloss:0.24618\n",
+-      "[271]\tvalidation_0-logloss:0.24618\n",
+-      "[0]\tvalidation_0-logloss:0.65623\n",
+-      "[100]\tvalidation_0-logloss:0.25011\n",
+-      "[200]\tvalidation_0-logloss:0.24918\n",
+-      "[251]\tvalidation_0-logloss:0.24923\n",
+-      "[0]\tvalidation_0-logloss:0.65630\n",
+-      "[100]\tvalidation_0-logloss:0.24689\n",
+-      "[200]\tvalidation_0-logloss:0.24593\n",
+-      "[300]\tvalidation_0-logloss:0.24587\n",
+-      "[334]\tvalidation_0-logloss:0.24596\n",
+-      "[0]\tvalidation_0-logloss:0.65626\n",
+-      "[100]\tvalidation_0-logloss:0.24643\n",
+-      "[200]\tvalidation_0-logloss:0.24538\n",
+-      "[300]\tvalidation_0-logloss:0.24521\n",
+-      "[400]\tvalidation_0-logloss:0.24520\n",
+-      "[436]\tvalidation_0-logloss:0.24534\n"
++      "[0]\tvalidation_0-logloss:0.64366\n",
++      "[100]\tvalidation_0-logloss:0.04621\n",
++      "[200]\tvalidation_0-logloss:0.04008\n",
++      "[300]\tvalidation_0-logloss:0.03861\n",
++      "[400]\tvalidation_0-logloss:0.03781\n",
++      "[500]\tvalidation_0-logloss:0.03729\n",
++      "[600]\tvalidation_0-logloss:0.03690\n",
++      "[700]\tvalidation_0-logloss:0.03683\n",
++      "[800]\tvalidation_0-logloss:0.03670\n",
++      "[867]\tvalidation_0-logloss:0.03672\n"
++     ]
++    },
++    {
++     "ename": "ValueError",
++     "evalue": "Feature shape mismatch, expected: 3, got 8",
++     "output_type": "error",
++     "traceback": [
++      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
++      "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
++      "Cell \u001b[0;32mIn[11], line 35\u001b[0m\n\u001b[1;32m     29\u001b[0m model\u001b[39m.\u001b[39mfit(X\u001b[39m=\u001b[39mX_train, y\u001b[39m=\u001b[39my_train,\n\u001b[1;32m     30\u001b[0m       eval_set\u001b[39m=\u001b[39m[(X_valid, y_valid)],\n\u001b[1;32m     31\u001b[0m       early_stopping_rounds \u001b[39m=\u001b[39m CFG\u001b[39m.\u001b[39mXG_PATIENCE,\n\u001b[1;32m     32\u001b[0m       verbose \u001b[39m=\u001b[39m \u001b[39m100\u001b[39m\n\u001b[1;32m     33\u001b[0m      )\n\u001b[1;32m     34\u001b[0m modelsXB\u001b[39m.\u001b[39mappend(model)\n\u001b[0;32m---> 35\u001b[0m predsXB\u001b[39m.\u001b[39mappend(model\u001b[39m.\u001b[39;49mpredict_proba(test)[:, \u001b[39m1\u001b[39m])\n",
++      "File \u001b[0;32m~/mambaforge/envs/kaggle/lib/python3.10/site-packages/xgboost/sklearn.py:1606\u001b[0m, in \u001b[0;36mXGBClassifier.predict_proba\u001b[0;34m(self, X, ntree_limit, validate_features, base_margin, iteration_range)\u001b[0m\n\u001b[1;32m   1604\u001b[0m     class_prob \u001b[39m=\u001b[39m softmax(raw_predt, axis\u001b[39m=\u001b[39m\u001b[39m1\u001b[39m)\n\u001b[1;32m   1605\u001b[0m     \u001b[39mreturn\u001b[39;00m class_prob\n\u001b[0;32m-> 1606\u001b[0m class_probs \u001b[39m=\u001b[39m \u001b[39msuper\u001b[39;49m()\u001b[39m.\u001b[39;49mpredict(\n\u001b[1;32m   1607\u001b[0m     X\u001b[39m=\u001b[39;49mX,\n\u001b[1;32m   1608\u001b[0m     ntree_limit\u001b[39m=\u001b[39;49mntree_limit,\n\u001b[1;32m   1609\u001b[0m     validate_features\u001b[39m=\u001b[39;49mvalidate_features,\n\u001b[1;32m   1610\u001b[0m     base_margin\u001b[39m=\u001b[39;49mbase_margin,\n\u001b[1;32m   1611\u001b[0m     iteration_range\u001b[39m=\u001b[39;49miteration_range,\n\u001b[1;32m   1612\u001b[0m )\n\u001b[1;32m   1613\u001b[0m \u001b[39m# If model is loaded from a raw booster there's no `n_classes_`\u001b[39;00m\n\u001b[1;32m   1614\u001b[0m \u001b[39mreturn\u001b[39;00m _cls_predict_proba(\n\u001b[1;32m   1615\u001b[0m     \u001b[39mgetattr\u001b[39m(\u001b[39mself\u001b[39m, \u001b[39m\"\u001b[39m\u001b[39mn_classes_\u001b[39m\u001b[39m\"\u001b[39m, \u001b[39m0\u001b[39m), class_probs, np\u001b[39m.\u001b[39mvstack\n\u001b[1;32m   1616\u001b[0m )\n",
++      "File \u001b[0;32m~/mambaforge/envs/kaggle/lib/python3.10/site-packages/xgboost/sklearn.py:1114\u001b[0m, in \u001b[0;36mXGBModel.predict\u001b[0;34m(self, X, output_margin, ntree_limit, validate_features, base_margin, iteration_range)\u001b[0m\n\u001b[1;32m   1112\u001b[0m \u001b[39mif\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39m_can_use_inplace_predict():\n\u001b[1;32m   1113\u001b[0m     \u001b[39mtry\u001b[39;00m:\n\u001b[0;32m-> 1114\u001b[0m         predts \u001b[39m=\u001b[39m \u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mget_booster()\u001b[39m.\u001b[39;49minplace_predict(\n\u001b[1;32m   1115\u001b[0m             data\u001b[39m=\u001b[39;49mX,\n\u001b[1;32m   1116\u001b[0m             iteration_range\u001b[39m=\u001b[39;49miteration_range,\n\u001b[1;32m   1117\u001b[0m             predict_type\u001b[39m=\u001b[39;49m\u001b[39m\"\u001b[39;49m\u001b[39mmargin\u001b[39;49m\u001b[39m\"\u001b[39;49m \u001b[39mif\u001b[39;49;00m output_margin \u001b[39melse\u001b[39;49;00m \u001b[39m\"\u001b[39;49m\u001b[39mvalue\u001b[39;49m\u001b[39m\"\u001b[39;49m,\n\u001b[1;32m   1118\u001b[0m             missing\u001b[39m=\u001b[39;49m\u001b[39mself\u001b[39;49m\u001b[39m.\u001b[39;49mmissing,\n\u001b[1;32m   1119\u001b[0m             base_margin\u001b[39m=\u001b[39;49mbase_margin,\n\u001b[1;32m   1120\u001b[0m             validate_features\u001b[39m=\u001b[39;49mvalidate_features,\n\u001b[1;32m   1121\u001b[0m         )\n\u001b[1;32m   1122\u001b[0m         \u001b[39mif\u001b[39;00m _is_cupy_array(predts):\n\u001b[1;32m   1123\u001b[0m             \u001b[39mimport\u001b[39;00m \u001b[39mcupy\u001b[39;00m  \u001b[39m# pylint: disable=import-error\u001b[39;00m\n",
++      "File \u001b[0;32m~/mambaforge/envs/kaggle/lib/python3.10/site-packages/xgboost/core.py:2269\u001b[0m, in \u001b[0;36mBooster.inplace_predict\u001b[0;34m(self, data, iteration_range, predict_type, missing, validate_features, base_margin, strict_shape)\u001b[0m\n\u001b[1;32m   2265\u001b[0m         \u001b[39mraise\u001b[39;00m \u001b[39mTypeError\u001b[39;00m(\n\u001b[1;32m   2266\u001b[0m             \u001b[39m\"\u001b[39m\u001b[39m`shape` attribute is required when `validate_features` is True.\u001b[39m\u001b[39m\"\u001b[39m\n\u001b[1;32m   2267\u001b[0m         )\n\u001b[1;32m   2268\u001b[0m     \u001b[39mif\u001b[39;00m \u001b[39mlen\u001b[39m(data\u001b[39m.\u001b[39mshape) \u001b[39m!=\u001b[39m \u001b[39m1\u001b[39m \u001b[39mand\u001b[39;00m \u001b[39mself\u001b[39m\u001b[39m.\u001b[39mnum_features() \u001b[39m!=\u001b[39m data\u001b[39m.\u001b[39mshape[\u001b[39m1\u001b[39m]:\n\u001b[0;32m-> 2269\u001b[0m         \u001b[39mraise\u001b[39;00m \u001b[39mValueError\u001b[39;00m(\n\u001b[1;32m   2270\u001b[0m             \u001b[39mf\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mFeature shape mismatch, expected: \u001b[39m\u001b[39m{\u001b[39;00m\u001b[39mself\u001b[39m\u001b[39m.\u001b[39mnum_features()\u001b[39m}\u001b[39;00m\u001b[39m, \u001b[39m\u001b[39m\"\u001b[39m\n\u001b[1;32m   2271\u001b[0m             \u001b[39mf\u001b[39m\u001b[39m\"\u001b[39m\u001b[39mgot \u001b[39m\u001b[39m{\u001b[39;00mdata\u001b[39m.\u001b[39mshape[\u001b[39m1\u001b[39m]\u001b[39m}\u001b[39;00m\u001b[39m\"\u001b[39m\n\u001b[1;32m   2272\u001b[0m         )\n\u001b[1;32m   2274\u001b[0m \u001b[39mfrom\u001b[39;00m \u001b[39m.\u001b[39;00m\u001b[39mdata\u001b[39;00m \u001b[39mimport\u001b[39;00m (\n\u001b[1;32m   2275\u001b[0m     _array_interface,\n\u001b[1;32m   2276\u001b[0m     _is_cudf_df,\n\u001b[0;32m   (...)\u001b[0m\n\u001b[1;32m   2279\u001b[0m     _transform_pandas_df,\n\u001b[1;32m   2280\u001b[0m )\n\u001b[1;32m   2282\u001b[0m enable_categorical \u001b[39m=\u001b[39m _has_categorical(\u001b[39mself\u001b[39m, data)\n",
++      "\u001b[0;31mValueError\u001b[0m: Feature shape mismatch, expected: 3, got 8"
+      ]
+     }
+    ],
+@@ -1226,12 +1196,12 @@
+     "          verbose = 100\n",
+     "         )\n",
+     "    modelsXB.append(model)\n",
+-    "    predsXB.append(model.predict_proba(test)[:, 1])"
++    "    predsXB.append(model.predict_proba(X_test)[:, 1])"
+    ]
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 9,
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -1251,7 +1221,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 11,
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [
+     {
+@@ -1358,7 +1328,7 @@
+   },
+   {
+    "cell_type": "code",
+-   "execution_count": 12,
++   "execution_count": null,
+    "metadata": {},
+    "outputs": [
+     {
+diff --git a/notebooks/wandb/latest-run b/notebooks/wandb/latest-run
+index d86c610..2e47077 120000
+--- a/notebooks/wandb/latest-run
++++ b/notebooks/wandb/latest-run
+@@ -1 +1 @@
+-run-20230315_101528-tdnu1cub
+\ No newline at end of file
++run-20230318_125408-duwsanv3
+\ No newline at end of file
