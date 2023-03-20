@@ -20,4 +20,6 @@ class CFG:
     REPEATS: int = 3
     XG_PATIENCE: int = 50
     CB_PATIENCE: int = 100
-    
+    BATCH_SIZE: int = 16
+    EPOCHS: int = 50
+    LR: int = 1e-3
