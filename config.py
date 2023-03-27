@@ -23,3 +23,14 @@ class CFG:
     BATCH_SIZE: int = 16
     EPOCHS: int = 50
     LR: int = 1e-3
+
+@dataclass
+class BASELINE:
+    SEED: int = 69
+    NFOLDS: int = 15
+    N_ESTIMATORS: int = 700
+    MDEPTH: int = 4
+    LR: float = 0.06
+    COLSAMPLE: float = 0.67
+    ESR: int = 150
+    
