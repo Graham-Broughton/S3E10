@@ -6,8 +6,10 @@
 
 - [Overview](#overview)
 - [Exploratory Data Analysis](#exploratory-data-analysis)
-- [Baseline](#baseline)
-- [Final Model](#final-model)
+- [Modelling](#modelling)
+  - [Baseline](#baseline)
+  - [Other Models](#other-models)
+  - [Final Model](#final-model)
 
 ## Overview
 
@@ -21,9 +23,15 @@ Since we are allowed to use the original data if we want to, one of the first th
 
 There were also some strong [correlations](data/images/plot_heatmap_Train Correlation.png) among the features as well as the target. Applying polynomial expansion and feature selection might be worthwhile. Lastly, the data's dimensions were reduced by PCA, TSNE and UMAP to [visualize in 3D](notebooks/1.EDA.ipynb#3d-visualization) which showed mostly separated classes with only a few of each class throughout the other. This should make it fairly easy to get a decent score, but much harder to get a good one.
 
-## Baseline
+## Modelling
 
-Random Forest models are often a good choice for a baseline because the don't need as much data prep prior to use, often yield good results and you can extract value information from them in the form of feature importance.
+### Baseline
 
-## Final Model
+Random Forest models are often a good choice for a baseline because the don't need as much data prep prior to use, often yield good results and you can extract value information from them in the form of feature importance. Calibration of the model was done to try and relieve the harsh negative penalty from confident incorrect answers due to log loss but was futile. As predicted from the EDA, the log loss score was surprisingly good - just 0.00151 high than my final public leaderboard score (0.03269 vs. 0.03118).
+
+### Other Models
+
+Pycaret was used to test a plethora of other models and preprocessing steps with high throughput. Mainly of interest for preprocessing were the interaction and transformation steps, polynomial with interaction, trigonometric and ratios were all tried in different permutations and different feature selection thresholds. The great thing about Pycaret is that it allows you to compare a multitude of models at the same time. Unfortunately, these experiments were done in the cloud and there was an error merging it with git.
+
+### Final Model
 
