@@ -4,7 +4,10 @@
 
 ## Table of Contents <!-- omit in toc -->
 
-- 
+- [Overview](#overview)
+- [Exploratory Data Analysis](#exploratory-data-analysis)
+- [Baseline](#baseline)
+- [Final Model](#final-model)
 
 ## Overview
 
@@ -17,4 +20,9 @@ Since we are allowed to use the original data if we want to, one of the first th
 ![class imbalance pie chart](data/images/plot_count_Train.png)
 
 There were also some strong [correlations](data/images/plot_heatmap_Train Correlation.png) among the features as well as the target. Applying polynomial expansion and feature selection might be worthwhile. Lastly, the data's dimensions were reduced by PCA, TSNE and UMAP to [visualize in 3D](notebooks/1.EDA.ipynb#3d-visualization) which showed mostly separated classes with only a few of each class throughout the other. This should make it fairly easy to get a decent score, but much harder to get a good one.
+
+## Baseline
+
+
+## Final Model
 
