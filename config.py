@@ -23,7 +23,7 @@ class CFG:
     BATCH_SIZE: int = 16
     EPOCHS: int = 50
     LR: int = 1e-3
-    SPLINES: int = 20
+    SPLINES: int = 19
 
 @dataclass
 class BASELINE:
