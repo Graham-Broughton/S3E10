@@ -1,5 +1,4 @@
 # TPS S3E10 <!-- omit in toc -->
-
 ## Nonlinearity <!-- omit in toc -->
 
 ## Table of Contents <!-- omit in toc -->
@@ -18,7 +17,15 @@ This is the 6th place solution for [episode 10 of the third season of the Tabula
 
 ## Exploratory Data Analysis
 
-Since we are allowed to use the original data if we want to, one of the first things investigated was if the two datasets were similar enough. As we can see in [the feature distributions](data/images/features_distribution.png), the synthetic data is nearly identical whilst the original is different. Other Kagglers performed Adversarial Validation to double check if the original was different enough to dump and the results were in agreement. There also appears to be an errata: the Skewness and Kurtosis features are mixed up. Skewness is centered close around 0 while Kurtosis is usually a larger positive number. In [the features by class distribution](data/images/features_vs_class_dist.png) there is a stark contrast how the target behaves. Some features the two classes are roughly similar and dense while others the positive class is easily distinguishable by how flat dissimilar it is from the negative. There were some very long tails which present the opportunity to log transform some features. Class imbalance was present at 90% to 10% negative and positive classes, respectively. As seen in the following pie chart:
+Since we are allowed to use the original data if we want to, one of the first things investigated was if the two datasets were similar enough. As we can see in 
+
+![the feature distributions](data/images/features_distribution.png)
+
+the synthetic data is nearly identical whilst the original is different. Other Kagglers performed Adversarial Validation to double check if the original was different enough to dump and the results were in agreement. There also appears to be an errata: the Skewness and Kurtosis features are mixed up. Skewness is centered close around 0 while Kurtosis is usually a larger positive number. In 
+
+[the features by class distribution](data/images/features_vs_class_dist.png)
+
+there is a stark contrast how the target behaves. Some features the two classes are roughly similar and dense while others the positive class is easily distinguishable by how flat dissimilar it is from the negative. There were some very long tails which present the opportunity to log transform some features. Class imbalance was present at 90% to 10% negative and positive classes, respectively. As seen in the following pie chart:
 
 ![class imbalance pie chart](data/images/plot_count_Train.png)
 
