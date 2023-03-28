@@ -16,13 +16,14 @@ class CFG:
     RAW_DATA: str = RAW_DATA
     PROCESSED_DATA: str = PROCESSED_DATA
     SEED: int = 69
-    NFOLDS: int = 3
+    NFOLDS: int = 10
     REPEATS: int = 3
     XG_PATIENCE: int = 50
     CB_PATIENCE: int = 100
     BATCH_SIZE: int = 16
     EPOCHS: int = 50
     LR: int = 1e-3
+    SPLINES: int = 20
 
 @dataclass
 class BASELINE:
