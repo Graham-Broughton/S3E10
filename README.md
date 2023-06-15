@@ -33,8 +33,7 @@ There were also some strong correlations among the features as well as the targe
 
 ![correlations](data/images/plot_heatmap_Train Correlation.png)
 
-Applying polynomial expansion and feature selection might be worthwhile. Lastly, the data's dimensions were reduced by PCA, TSNE and UMAP to 
-[visualize in 3D](notebooks/1.EDA.ipynb#3d-visualization) interactively, which showed the classes were mostly separated, with only a few of each class throughout the opposite one. This should make it fairly easy to get a decent score, but much harder to get a good one.
+Applying polynomial expansion and feature selection might be worthwhile. Lastly, the data's dimensions were reduced by PCA, TSNE and UMAP to [visualize in 3D](notebooks/1.EDA.ipynb#3d-visualization) interactively, which showed the classes were mostly separated, with only a few of each class throughout the opposite one. This should make it fairly easy to get a decent score, but much harder to get a good one.
 
 ## Modelling
 
@@ -50,8 +49,8 @@ Generalized Additive Models (GAM) were the clincher in this competition. [Patric
 
 ### Final Model
 
-The final model was an ensemble of the best performing GAM, forests and the same forests but resgressors instead of classifiers. The ensemble was weighted soft voting where the weights were chosen by an educated guess based on how well they performed on the leaderboard. This guess turned out to be almost the best choice of weights where adjusting most of them, either up or down, would decrease the public leaderboard score.
+The final model was an ensemble of the best performing GAM, forests and forests regressors instead of classifiers. The ensemble was weighted soft voting where the weights were chosen by an educated guess based on how well they performed on the leaderboard. This guess turned out to be almost the best choice of weights where adjusting most of them, either up or down, would decrease the public leaderboard score.
 
 ## Conclusion
 
-As usual, this competition was fun yet extremely frustrating - you can try everything you can think of and go nowhere. I added an assortment of new techniques to my library for next time. Pycaret may be quick and easy to use while being very customisable, but it is just not *quite* customisable enough. A few of the top submissions had a similar idea to implement feature interactions and polynomial transformations. They had more control of how they were selected afterwords (permutation selection) instead of whatever Pycaret does and the we can see what a difference that made. Optuna was also essentially a waste of time, all it did was overfit the already probably overfit forest models to the leader board. Placing 6th place was very rewarding though, I have been working tireless for months now without going that great. Now, It feels good all that work has been paying off. Time for the next one!
+As usual, this competition was fun yet extremely frustrating - you can try everything you can think of and go nowhere. I added an assortment of new techniques to my library for next time. Pycaret may be quick and easy to use while being very customizable, but it is just not *quite* customizable enough. A few of the top submissions had a similar idea to implement feature interactions and polynomial transformations. They had more control of how they were selected afterword (permutation selection) instead of whatever Pycaret does and the we can see what a difference that made. Optuna was also essentially a waste of time, all it did was overfit the already probably overfit forest models to the leader board. Placing 6th place was very rewarding though, I have been working tireless for months now without going that great. Now, It feels good all that work has been paying off. Time for the next one!
